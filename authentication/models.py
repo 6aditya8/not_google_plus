@@ -13,3 +13,14 @@ class Account(AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now=True)
     objects = AccountManager()
     
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    def __unicode__(self):
+        return self.email
+    
+    def get_full_name(self):
+        return ''.join(self.first_name, self.last_name)
+    
+    def get_short_name(self):
+        return self.first_name
