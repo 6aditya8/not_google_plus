@@ -12,13 +12,13 @@
             register: register
         };
         return Authentication;
-    }
 
-    function register(email, password, username) {
-        return $http.post ('/accounts/', {
-            username: username,
-            password: password,
-            email: email
-        })
+        function register(email, password, username) {
+            return $http.post ('/accounts/', {
+                username: username,
+                password: password,
+                email: email
+            })
+        }
     }
 })();
