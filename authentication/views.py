@@ -5,7 +5,7 @@ from .serializers import AccountSerializer
 from .permissions import IsAccountOwner
 
 
-class AccountViewSet(viewsets.modelViewSet):
+class AccountViewSet(viewsets.ModelViewSet):
     lookup_field = 'username'
     serializer_class = AccountSerializer
     queryset = Account.objects.all()
@@ -26,9 +26,9 @@ class AccountViewSet(viewsets.modelViewSet):
         if serializer.is_valid():
             Account.objects.create_user(**serializer.validated_data)
 
-            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
+            return Response(serializer.validated_data, status = status.HTTP_201_CREATED)
 
-    return Response({
-                    'status': 'Bad Request',
-                    'message': "Account couldn't be created"
-    }, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+                        'status': 'Bad Request',
+                        'message': "Account couldn't be created"
+        }, status = status.HTTP_400_BAD_REQUEST)

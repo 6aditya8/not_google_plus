@@ -18,4 +18,7 @@
 
   angular
     .module('thinkster.routes', ['ngRoute']);
+  
+  angular
+    .module('thinkster.config', []);
 })();
