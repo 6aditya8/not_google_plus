@@ -1,4 +1,4 @@
-This repo is the practice for "Learning django and angularjs" from thinkster.io
+This repo has practice exercises for "Learning django and angularjs" from thinkster.io
 ## Installation
 
 * `$ pip install -r requirements.txt`
