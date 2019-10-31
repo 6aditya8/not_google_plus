@@ -12,12 +12,30 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+def get_env_var(name, default=None):
+    try:
+        return os.environ[name]
+    except KeyError:
+        if default:
+            return default
+        raise ImproperlyConfigured('Set the {0} environment variable.'.format(name))
+
+def read_env():
+    dotenv_path = os.path.join(BASE_DIR, '.env')
+    try:
+        load_dotenv(dotenv_path)
+    except IOError:
+        raise
+        pass
+
+# load environment variables from .env file
+read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$6(x*g_2g9l_*g8peb-@anl5^*8q!1w)k&e&2!i)t6$s8kia94'
+SECRET_KEY = get_env_var('SECRET_KEY', default='no-secret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
@@ -25,7 +43,6 @@ DEBUG = os.environ.get('DEBUG', True)
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
